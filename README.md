@@ -75,37 +75,47 @@ namespace csharp_through_code_examples
             {
                 sbyte.MaxValue.ToString(),
                 sbyte.MinValue.ToString(),
-            }, 
+            },
             ["byte"] = new List<string>
             {
                 byte.MaxValue.ToString(),
                 byte.MinValue.ToString(),
-            }, 
+            },
             ["short"] = new List<string>
             {
                 short.MaxValue.ToString(),
                 short.MinValue.ToString()
-            }, 
+            },
             ["int"] = new List<string>
             {
                 int.MaxValue.ToString(),
                 int.MinValue.ToString(),
-            }, 
+            },
             ["uint"] = new List<string>
             {
                 uint.MaxValue.ToString(),
                 uint.MinValue.ToString()
-            }, 
+            },
+            ["ushort"] = new List<string>
+            {
+                ushort.MaxValue.ToString(),
+                ushort.MinValue.ToString()
+            },
+            ["ulong"] = new List<string>
+            {
+                ulong.MaxValue.ToString(),
+                ulong.MinValue.ToString()
+            },
             ["long"] = new List<string>
             {
                 long.MaxValue.ToString(),
                 long.MinValue.ToString(),
-            }, 
+            },
             ["bool"] = new List<string>
             {
                 "true",
                 "false"
-            }, 
+            },
             ["string"] = new List<string>
             {
                 "abcdefg",
@@ -150,13 +160,21 @@ namespace csharp_through_code_examples
             while (round < 5)
             {
                 string test = AllTypes.ElementAt(random.Next(AllTypes.Count)).Key;
+                string testLine = AllTypes[test][random.Next(AllTypes[test].Count)];
 
                 Console.Write(String.Format("Var: {0}\nThis is: {1}\n> ",
-                    AllTypes[test][random.Next(AllTypes[test].Count)], Variants(test)));
+                    testLine, Variants(test)));
 
-                if (Console.ReadLine().ToLower() == test)
+                string response = Console.ReadLine();
+
+                if (response == test)
                 {
                     Console.WriteLine("YES!\n");
+                    win += 1;
+                }
+                else if (AllTypes.ContainsKey(response) && AllTypes[response].Contains(testLine))
+                {
+                    Console.WriteLine("Ow... But why not?\n");
                     win += 1;
                 }
                 else
@@ -170,7 +188,6 @@ namespace csharp_through_code_examples
         }
     }
 }
-
 ```
 
 ## Class Encapsulation 
