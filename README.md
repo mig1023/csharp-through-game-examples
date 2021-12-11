@@ -3,9 +3,10 @@
 ## Content
 
 0. [Hello World](#hello-world)
-1. [Class Encapsulation](#class-encapsulation)
-2. [Class Inheritance](#class-inheritance)
-3. [Class Dispose](#class-dispose)
+1. [Variables types](#variables-types)
+2. [Class Encapsulation](#class-encapsulation)
+3. [Class Inheritance](#class-inheritance)
+4. [Class Dispose](#class-dispose)
 
 ## Hello World
 
@@ -54,6 +55,122 @@ namespace hello_world
         }
     }
 }
+```
+## Variables types
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace csharp_through_code_examples
+{
+    class Program
+    {
+        private static Random random = new Random();
+
+        private static Dictionary<string, List<string>> AllTypes = new Dictionary<string, List<string>>
+        {
+            ["sbyte"] = new List<string>
+            {
+                sbyte.MaxValue.ToString(),
+                sbyte.MinValue.ToString(),
+            }, 
+            ["byte"] = new List<string>
+            {
+                byte.MaxValue.ToString(),
+                byte.MinValue.ToString(),
+            }, 
+            ["short"] = new List<string>
+            {
+                short.MaxValue.ToString(),
+                short.MinValue.ToString()
+            }, 
+            ["int"] = new List<string>
+            {
+                int.MaxValue.ToString(),
+                int.MinValue.ToString(),
+            }, 
+            ["uint"] = new List<string>
+            {
+                uint.MaxValue.ToString(),
+                uint.MinValue.ToString()
+            }, 
+            ["long"] = new List<string>
+            {
+                long.MaxValue.ToString(),
+                long.MinValue.ToString(),
+            }, 
+            ["bool"] = new List<string>
+            {
+                "true",
+                "false"
+            }, 
+            ["string"] = new List<string>
+            {
+                "abcdefg",
+                "foo bar"
+            },
+            ["char"] = new List<string>
+            {
+                "a",
+                "\\0",
+                "\\u006A"
+            },
+        };
+
+        private static string Variants(string correct)
+        {
+            List<string> types = new List<string> { correct };
+
+            for (int i = 1; i < 3; i++)
+            {
+                string nextVariant;
+
+                do
+                {
+                    nextVariant = AllTypes.ElementAt(random.Next(AllTypes.Count)).Key;
+                }
+                while (types.Contains(nextVariant));
+
+                types.Add(nextVariant);
+            }
+
+            List<string> randTypes = types.OrderBy(x => random.Next()).ToList();
+
+            return String.Format("{0}, {1} or {2}?", randTypes[0], randTypes[1], randTypes[2]);
+        }
+
+        static void Main(string[] args)
+        {
+            int win = 0, round = 0;
+
+            Console.WriteLine("Try to guess the type of the variable by value!\n");
+
+            while (round < 5)
+            {
+                string test = AllTypes.ElementAt(random.Next(AllTypes.Count)).Key;
+
+                Console.Write(String.Format("Var: {0}\nThis is: {1}\n> ",
+                    AllTypes[test][random.Next(AllTypes[test].Count)], Variants(test)));
+
+                if (Console.ReadLine().ToLower() == test)
+                {
+                    Console.WriteLine("YES!\n");
+                    win += 1;
+                }
+                else
+                    Console.WriteLine(String.Format("No ({0})\n", test));
+
+                round += 1;
+            }
+
+            Console.WriteLine(String.Format("Result: {0}/5", win));
+            Console.ReadLine();
+        }
+    }
+}
+
 ```
 
 ## Class Encapsulation 
