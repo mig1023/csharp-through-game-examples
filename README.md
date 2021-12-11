@@ -59,10 +59,6 @@ namespace hello_world
 ## Variables types
 
 ```c#
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace csharp_through_code_examples
 {
     class Program
@@ -71,62 +67,17 @@ namespace csharp_through_code_examples
 
         private static Dictionary<string, List<string>> AllTypes = new Dictionary<string, List<string>>
         {
-            ["sbyte"] = new List<string>
-            {
-                sbyte.MaxValue.ToString(),
-                sbyte.MinValue.ToString(),
-            },
-            ["byte"] = new List<string>
-            {
-                byte.MaxValue.ToString(),
-                byte.MinValue.ToString(),
-            },
-            ["short"] = new List<string>
-            {
-                short.MaxValue.ToString(),
-                short.MinValue.ToString()
-            },
-            ["int"] = new List<string>
-            {
-                int.MaxValue.ToString(),
-                int.MinValue.ToString(),
-            },
-            ["uint"] = new List<string>
-            {
-                uint.MaxValue.ToString(),
-                uint.MinValue.ToString()
-            },
-            ["ushort"] = new List<string>
-            {
-                ushort.MaxValue.ToString(),
-                ushort.MinValue.ToString()
-            },
-            ["ulong"] = new List<string>
-            {
-                ulong.MaxValue.ToString(),
-                ulong.MinValue.ToString()
-            },
-            ["long"] = new List<string>
-            {
-                long.MaxValue.ToString(),
-                long.MinValue.ToString(),
-            },
-            ["bool"] = new List<string>
-            {
-                "true",
-                "false"
-            },
-            ["string"] = new List<string>
-            {
-                "abcdefg",
-                "foo bar"
-            },
-            ["char"] = new List<string>
-            {
-                "a",
-                "\\0",
-                "\\u006A"
-            },
+            ["sbyte"]   = new List<string> { "-128", "127" },
+            ["byte"]    = new List<string> { "0", "255" },
+            ["short"]   = new List<string> { "-32768", "32767" },
+            ["int"]     = new List<string> { "-2147483648", "2147483647" },
+            ["uint"]    = new List<string> { "0", "4294967295" },
+            ["ushort"]  = new List<string> { "0", "65535" },
+            ["ulong"]   = new List<string> { "0", "18446744073709551615" },
+            ["long"]    = new List<string> { "-9223372036854775808", "9223372036854775807" },
+            ["bool"]    = new List<string> { "true", "false" },
+            ["string"]  = new List<string> { "abcdefg", "foo bar" },
+            ["char"]    = new List<string> { "a", "\\0", "\\u006A" },
         };
 
         private static string Variants(string correct)
