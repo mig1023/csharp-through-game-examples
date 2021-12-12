@@ -1,4 +1,4 @@
-# С# through games examples
+# С# through game examples
 
 ## Content
 
