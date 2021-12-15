@@ -4,9 +4,10 @@
 
 0. [Hello World](#hello-world)
 1. [Variables types](#variables-types)
-2. [Class Encapsulation](#class-encapsulation)
-3. [Class Inheritance](#class-inheritance)
-4. [Class Dispose](#class-dispose)
+2. [List](#list)
+3. [Class Encapsulation](#class-encapsulation)
+4. [Class Inheritance](#class-inheritance)
+5. [Class Dispose](#class-dispose)
 
 ## Hello World
 
@@ -135,6 +136,69 @@ namespace csharp_through_code_examples
             }
 
             Console.WriteLine(String.Format("Result: {0}/5", win));
+            Console.ReadLine();
+        }
+    }
+}
+```
+
+## List
+
+```c#
+using System;
+using System.Collections.Generic;
+
+namespace csharp_through_code_examples
+{
+    class Program
+    {
+        private static Random random = new Random();
+
+        private static List<string> SecretWords = new List<string>
+        {
+            "antelope", "bear", "cow", "donkey", "falcon", "gibbon", "horse",
+            "iguana", "jaguar", "koala", "lion", "monkey", "octopus", "shark"
+        };
+
+        private static List<char> Opened = new List<char>();
+
+        private static string ShowWord(string word)
+        {
+            for (int i = 0; i < word.Length; i++)
+                if (!Opened.Contains(word[i]))
+                    word = word.Replace(word[i], '*');
+
+            return word;
+        }
+
+        private static bool WordOpened(string word) => !ShowWord(word).Contains("*");
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Try to guess the word!\n");
+
+            string word = SecretWords[random.Next(SecretWords.Count)];
+            int attempts = 0;
+
+            do
+            {
+                Console.Write(String.Format("Word: {0}\n{1}etter: ",
+                    ShowWord(word), (attempts > 0 ? "Next l" : "L")));
+                Char key = Char.ToLower(Console.ReadKey().KeyChar);
+
+                if (word.Contains(key))
+                {
+                    Console.WriteLine("\nYES!\n");
+                    Opened.Add(key);
+                }
+                else
+                    Console.WriteLine("\nNo...\n");
+
+                attempts += 1;
+            }
+            while (!WordOpened(word));
+
+            Console.WriteLine(String.Format("You WIN!\nAttempts: {0}", attempts));
             Console.ReadLine();
         }
     }
