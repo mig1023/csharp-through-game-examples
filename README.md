@@ -13,7 +13,7 @@
 ## Hello World
 
 ```c#
-System;
+using System;
 
 namespace hello_world
 {
@@ -323,7 +323,7 @@ namespace csharp_through_code_examples
 ## Class Inheritance
 
 ```c#
-sing System;
+using System;
 
 namespace csharp_through_code_examples
 {
