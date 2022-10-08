@@ -582,6 +582,49 @@ using System;
 
 namespace csharp_through_code_examples
 {
+    interface WeaponBehavior
+    {
+        int Use();
+        string Name();
+    }
+
+    class Character
+    {
+        public WeaponBehavior Weapon;
+        public string Name;
+        public int Hitpoints;
+    }
+
+    class SwordBehavior : WeaponBehavior
+    {
+        public int Use() => 5;
+        public string Name() => "sword";
+    }
+
+    class AxeBehavior : WeaponBehavior
+    {
+        public int Use() => 4;
+        public string Name() => "axe";
+    }
+
+    class СlubBehavior : WeaponBehavior
+    {
+        public int Use() => 3;
+        public string Name() => "club";
+    }
+
+    class WarhammerBehavior : WeaponBehavior
+    {
+        public int Use() => 6;
+        public string Name() => "warhammer";
+    }
+
+    class KnifeBehavior : WeaponBehavior
+    {
+        public int Use() => 2;
+        public string Name() => "knife";
+    }
+
     class Program
     {
         static Character hero = new Character
@@ -646,49 +689,6 @@ namespace csharp_through_code_examples
 
             Console.WriteLine("\n{0} WIN!!", orc.Hitpoints <= 0 ? hero.Name : orc.Name);
         }
-    }
-
-    interface WeaponBehavior
-    {
-        int Use();
-        string Name();
-    }
-
-    class Character
-    {
-        public WeaponBehavior Weapon;
-        public string Name;
-        public int Hitpoints;
-    }
-
-    class SwordBehavior: WeaponBehavior
-    {
-        public int Use() => 5;
-        public string Name() => "sword";
-    }
-
-    class AxeBehavior : WeaponBehavior
-    {
-        public int Use() => 4;
-        public string Name() => "axe";
-    }
-
-    class СlubBehavior : WeaponBehavior
-    {
-        public int Use() => 3;
-        public string Name() => "club";
-    }
-
-    class WarhammerBehavior : WeaponBehavior
-    {
-        public int Use() => 6;
-        public string Name() => "warhammer";
-    }
-
-    class KnifeBehavior : WeaponBehavior
-    {
-        public int Use() => 2;
-        public string Name() => "knife";
     }
 }
 ```
