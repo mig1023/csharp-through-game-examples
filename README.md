@@ -501,7 +501,7 @@ namespace csharp_through_code_examples
             public int Move() => 1000;
         }
 
-        private static Movement GetTransport(string type)
+        private static Movement Transport(string type)
         {
             switch (type.ToLower())
             {
@@ -517,8 +517,11 @@ namespace csharp_through_code_examples
                 case "airplane":
                     return new Airplane();
 
-                default:
+                case "foot":
                     return new Foot();
+
+                default:
+                    return null;
             }
         }
 
@@ -537,7 +540,10 @@ namespace csharp_through_code_examples
 
                 Console.Write("\n> ");
 
-                Movement movement = GetTransport(Console.ReadLine());
+                Movement movement = Transport(Console.ReadLine());
+
+                if (movement == null)
+                    continue;
 
                 int step = movement.Move();
 
