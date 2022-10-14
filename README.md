@@ -811,7 +811,7 @@ namespace csharp_through_code_examples
         {
             string fullPhrase = phrases[random.Next(phrases.Count)];
 
-            List<string> enigme = fullPhrase
+            List<string> puzzle = fullPhrase
                 .Split(' ')
                 .Select(x => x.Trim())
                 .OrderBy(a => random.Next())
@@ -819,8 +819,8 @@ namespace csharp_through_code_examples
 
             Console.WriteLine("Puzzles:");
 
-            for (int i = 0; i < enigme.Count(); i++)
-                Console.WriteLine("{0}: {1}", i + 1, enigme[i]);
+            for (int i = 0; i < puzzle.Count(); i++)
+                Console.WriteLine("{0}: {1}", i + 1, puzzle[i]);
 
             string responseLine = String.Empty;
 
@@ -835,7 +835,7 @@ namespace csharp_through_code_examples
 
                 List<string> responseStrings = responseLine.Split(' ').ToList();
 
-                if (responseStrings.Count() < enigme.Count)
+                if (responseStrings.Count() < puzzle.Count)
                 {
                     Console.WriteLine("Fail! Not enough answers! Try again!");
                     continue;
@@ -848,7 +848,7 @@ namespace csharp_through_code_examples
 
                 foreach (int word in response)
                 {
-                    newDecorator = new Decorator(enigme[word - 1]);
+                    newDecorator = new Decorator(puzzle[word - 1]);
                     newDecorator.SetComponent(prevDecorator ?? (ComponentAbstraction)newPhrase);
                     prevDecorator = newDecorator;
                 }
