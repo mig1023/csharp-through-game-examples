@@ -12,6 +12,7 @@
 7. [Interfaces](#interfaces)
 8. [Strategy pattern](#strategy-pattern)
 9. [Observer pattern](#observer-pattern)
+10. [Decorator pattern](#decorator-pattern)
 
 ## Hello World
 
@@ -781,6 +782,124 @@ namespace csharp_through_code_examples
             }
             while (!String.IsNullOrEmpty(action));
         }
+    }
+}
+```
+
+## Decorator pattern
+
+```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace csharp_through_code_examples
+{
+    class Program
+    {
+        private static Random random = new Random();
+
+        private static List<string> phrases = new List<string>
+        {
+            "The journey of a thousand miles begins with one step",
+            "That which does not kill us makes us stronger",
+            "I want to believe",
+            "The secret of getting ahead is getting started",
+        };
+
+        static void Main(string[] args)
+        {
+            string fullPhrase = phrases[random.Next(phrases.Count)];
+
+            List<string> enigme = fullPhrase
+                .Split(' ')
+                .Select(x => x.Trim())
+                .OrderBy(a => random.Next())
+                .ToList();
+
+            Console.WriteLine("Puzzles:");
+
+            for (int i = 0; i < enigme.Count(); i++)
+                Console.WriteLine("{0}: {1}", i + 1, enigme[i]);
+
+            string responseLine = String.Empty;
+
+            do
+            {
+                Console.Write("\nEnter your order (1 2 3 4...): ");
+
+                responseLine = Console.ReadLine();
+
+                if (String.IsNullOrEmpty(responseLine))
+                    break;
+
+                List<string> responseStrings = responseLine.Split(' ').ToList();
+
+                if (responseStrings.Count() < enigme.Count)
+                {
+                    Console.WriteLine("Fail! Not enough answers! Try again!");
+                    continue;
+                }
+
+                List<int> response = responseStrings.Select(x => int.Parse(x)).ToList();
+
+                Component newPhrase = new Component();
+                Decorator newDecorator = null, prevDecorator = null;
+
+                foreach (int word in response)
+                {
+                    newDecorator = new Decorator(enigme[word - 1]);
+                    newDecorator.SetComponent(prevDecorator ?? (ComponentAbstraction)newPhrase);
+                    prevDecorator = newDecorator;
+                }
+
+                string responsePhrase = newDecorator.Operation().Trim();
+
+                Console.WriteLine("Result: {0}", responsePhrase);
+
+                if (fullPhrase == responsePhrase)
+                {
+                    Console.WriteLine("WIN!");
+                    responseLine = String.Empty;
+                }
+                else
+                    Console.WriteLine("Fail! Try again!");
+            }
+            while (!String.IsNullOrEmpty(responseLine));
+        }
+    }
+
+    abstract class ComponentAbstraction
+    {
+        public abstract string Operation();
+    }
+
+    class Component : ComponentAbstraction
+    {
+        public override string Operation() =>
+            String.Empty;
+    }
+
+    abstract class DecoratorAbstraction : ComponentAbstraction
+    {
+        protected ComponentAbstraction component;
+
+        public void SetComponent(ComponentAbstraction component) =>
+            this.component = component;
+
+        public override string Operation() =>
+            component.Operation();
+    }
+
+    class Decorator : DecoratorAbstraction
+    {
+        private string Word;
+
+        public Decorator(string word) =>
+            Word = word;
+
+        public override string Operation() =>
+            String.Format("{0} {1}", base.Operation(), Word);
     }
 }
 ```
