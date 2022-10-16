@@ -13,6 +13,7 @@
 8. [Strategy pattern](#strategy-pattern)
 9. [Observer pattern](#observer-pattern)
 10. [Decorator pattern](#decorator-pattern)
+11. [Factory method pattern](#factory-method-pattern)
 
 ## Hello World
 
@@ -900,6 +901,130 @@ namespace csharp_through_code_examples
 
         public override string Operation() =>
             String.Format("{0} {1}", base.Operation(), Word);
+    }
+}
+```
+
+## Factory method pattern
+
+```c#
+using System;
+using System.Collections.Generic;
+
+namespace csharp_through_code_examples
+{
+    class Program
+    {
+        public abstract class Hero
+        {
+            protected string Name;
+            public abstract string Description();
+        }
+
+        public abstract class HeroCreator
+        {
+            public abstract Hero HeroFactoryMethod();
+        }
+
+        public class Human : Hero
+        {
+            public Human(string name) => Name = name;
+            public override string Description() => String.Format("human {0}", Name);
+        }
+
+        public class HumanCreator : HeroCreator
+        {
+            private List<string> names = new List<string> { "Aragorn", "Boromir", "Faramir" };
+            private static int nameIndex = -1;
+
+            public override Hero HeroFactoryMethod()
+            {
+                nameIndex = (nameIndex + 1 == names.Count ? 0 : nameIndex + 1);
+                return new Human(names[nameIndex]);
+            }
+        }
+
+        public class Elf : Hero
+        {
+            public Elf(string name) => Name = name;
+            public override string Description() => String.Format("elf {0}", Name);
+        }
+
+        public class ElfCreator : HeroCreator
+        {
+            private List<string> names = new List<string> { "Legolas", "Galadriel", "Haldir" };
+            private static int nameIndex = -1;
+
+            public override Hero HeroFactoryMethod()
+            {
+                nameIndex = (nameIndex + 1 == names.Count ? 0 : nameIndex + 1);
+                return new Elf(names[nameIndex]);
+            }
+        }
+
+        public class Orc : Hero
+        {
+            public Orc(string name) => Name = name;
+            public override string Description() => String.Format("orc {0}", Name);
+        }
+
+        public class OrcCreator : HeroCreator
+        {
+            private List<string> names = new List<string> { "Azog", "Ugluk", "Grishnakh" };
+            private static int nameIndex = -1;
+
+            public override Hero HeroFactoryMethod()
+            {
+                nameIndex = (nameIndex + 1 == names.Count ? 0 : nameIndex + 1);
+                return new Orc(names[nameIndex]);
+            }
+        }
+
+        public static HeroCreator Creator(string type)
+        {
+            switch (type.ToLower())
+            {
+                case "human":
+                    return new HumanCreator();
+
+                case "elf":
+                    return new ElfCreator();
+
+                case "orc":
+                    return new OrcCreator();
+
+                default:
+                    return null;
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            string heroType;
+
+            do
+            {
+                Console.Write("Hero type > ");
+                heroType = Console.ReadLine();
+
+                if (String.IsNullOrEmpty(heroType))
+                    break;
+
+                HeroCreator heroFactory = Creator(heroType);
+
+                if (heroFactory == null)
+                {
+                    Console.WriteLine("Invalid hero type! Try again!");
+                    continue;
+                }
+                else
+                {
+                    Hero hero = heroFactory.HeroFactoryMethod();
+                    Console.WriteLine("New hero created: {0}", hero.Description());
+                }
+            }
+            while (true);
+        }
     }
 }
 ```
