@@ -939,8 +939,12 @@ namespace csharp_through_code_examples
 
             public override Hero HeroFactoryMethod()
             {
-                nameIndex = (nameIndex + 1 == names.Count ? 0 : nameIndex + 1);
-                return new Human(names[nameIndex]);
+                nameIndex += 1;
+
+                if (nameIndex >= names.Count)
+                    return null;
+                else
+                    return new Human(names[nameIndex]);
             }
         }
 
@@ -957,8 +961,12 @@ namespace csharp_through_code_examples
 
             public override Hero HeroFactoryMethod()
             {
-                nameIndex = (nameIndex + 1 == names.Count ? 0 : nameIndex + 1);
-                return new Elf(names[nameIndex]);
+                nameIndex += 1;
+
+                if (nameIndex >= names.Count)
+                    return null;
+                else
+                    return new Elf(names[nameIndex]);
             }
         }
 
@@ -975,8 +983,12 @@ namespace csharp_through_code_examples
 
             public override Hero HeroFactoryMethod()
             {
-                nameIndex = (nameIndex + 1 == names.Count ? 0 : nameIndex + 1);
-                return new Orc(names[nameIndex]);
+                nameIndex += 1;
+
+                if (nameIndex >= names.Count)
+                    return null;
+                else
+                    return new Orc(names[nameIndex]);
             }
         }
 
@@ -1020,7 +1032,11 @@ namespace csharp_through_code_examples
                 else
                 {
                     Hero hero = heroFactory.HeroFactoryMethod();
-                    Console.WriteLine("New hero created: {0}", hero.Description());
+
+                    if (hero == null)
+                        Console.WriteLine("No more hero of this type...");
+                    else
+                        Console.WriteLine("New hero created: {0}", hero.Description());
                 }
             }
             while (true);
