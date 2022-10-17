@@ -1012,12 +1012,10 @@ namespace csharp_through_code_examples
 
         static void Main(string[] args)
         {
-            string heroType;
-
             do
             {
                 Console.Write("Hero type > ");
-                heroType = Console.ReadLine();
+                string heroType = Console.ReadLine();
 
                 if (String.IsNullOrEmpty(heroType))
                     break;
