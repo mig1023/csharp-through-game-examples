@@ -28,9 +28,9 @@ namespace hello_world
     {
         private static Random rand = new Random();
 
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello World! It's guessing game!\n");
+            Console.WriteLine("Hello World!\nIt's guessing game!\n");
 
             int secret = rand.Next(100) + 1;
             int attempt = 0;
@@ -40,8 +40,7 @@ namespace hello_world
             {
                 attemptsNumber += 1;
 
-                Console.Write(String.Format("Your {0}try: ",
-                    (attemptsNumber > 1 ? "next " : String.Empty)));
+                Console.Write("Your {0}try: ", attemptsNumber > 1 ? "next " : String.Empty);
 
                 bool thisIsNumber = int.TryParse(Console.ReadLine(), out attempt);
 
@@ -55,8 +54,7 @@ namespace hello_world
                     Console.WriteLine("Undershoot!\n");
 
                 else
-                    Console.WriteLine(String.Format("Exactly! You WIN!\n\n" +
-                        "Number of attempts: {0}",attemptsNumber));
+                    Console.WriteLine("Exactly! You WIN!\n\nNumber of attempts: {0}", attemptsNumber);
             }
             while (secret != attempt);
 
@@ -68,6 +66,10 @@ namespace hello_world
 ## Variables types
 
 ```c#
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace csharp_through_code_examples
 {
     class Program
@@ -76,17 +78,17 @@ namespace csharp_through_code_examples
 
         private static Dictionary<string, List<string>> AllTypes = new Dictionary<string, List<string>>
         {
-            ["sbyte"]   = new List<string> { "-128", "127" },
-            ["byte"]    = new List<string> { "0", "255" },
-            ["short"]   = new List<string> { "-32768", "32767" },
-            ["int"]     = new List<string> { "-2147483648", "2147483647" },
-            ["uint"]    = new List<string> { "0", "4294967295" },
-            ["ushort"]  = new List<string> { "0", "65535" },
-            ["ulong"]   = new List<string> { "0", "18446744073709551615" },
-            ["long"]    = new List<string> { "-9223372036854775808", "9223372036854775807" },
-            ["bool"]    = new List<string> { "true", "false" },
-            ["string"]  = new List<string> { "abcdefg", "foo bar" },
-            ["char"]    = new List<string> { "a", "\\0", "\\u006A" },
+            ["sbyte"] = new List<string> { "-128", "127" },
+            ["byte"] = new List<string> { "0", "255" },
+            ["short"] = new List<string> { "-32768", "32767" },
+            ["int"] = new List<string> { "-2147483648", "2147483647" },
+            ["uint"] = new List<string> { "0", "4294967295" },
+            ["ushort"] = new List<string> { "0", "65535" },
+            ["ulong"] = new List<string> { "0", "18446744073709551615" },
+            ["long"] = new List<string> { "-9223372036854775808", "9223372036854775807" },
+            ["bool"] = new List<string> { "true", "false" },
+            ["string"] = new List<string> { "abcdefg", "foo bar" },
+            ["char"] = new List<string> { "a", "\\0", "\\u006A" },
         };
 
         private static string Variants(string correct)
@@ -111,7 +113,7 @@ namespace csharp_through_code_examples
             return String.Format("{0}, {1} or {2}?", randTypes[0], randTypes[1], randTypes[2]);
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             int win = 0, round = 0;
 
@@ -122,8 +124,7 @@ namespace csharp_through_code_examples
                 string test = AllTypes.ElementAt(random.Next(AllTypes.Count)).Key;
                 string testLine = AllTypes[test][random.Next(AllTypes[test].Count)];
 
-                Console.Write(String.Format("Var: {0}\nThis is: {1}\n> ",
-                    testLine, Variants(test)));
+                Console.Write("Var: {0}\nThis is: {1}\n> ", testLine, Variants(test));
 
                 string response = Console.ReadLine();
 
@@ -138,12 +139,12 @@ namespace csharp_through_code_examples
                     win += 1;
                 }
                 else
-                    Console.WriteLine(String.Format("No ({0})\n", test));
+                    Console.WriteLine("No ({0})\n", test);
 
                 round += 1;
             }
 
-            Console.WriteLine(String.Format("Result: {0}/5", win));
+            Console.WriteLine("Result: {0}/5", win);
             Console.ReadLine();
         }
     }
@@ -179,9 +180,10 @@ namespace csharp_through_code_examples
             return word;
         }
 
-        private static bool WordOpened(string word) => !ShowWord(word).Contains("*");
+        private static bool WordOpened(string word) =>
+            !ShowWord(word).Contains("*");
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Try to guess the word!\n");
 
@@ -190,8 +192,8 @@ namespace csharp_through_code_examples
 
             do
             {
-                Console.Write(String.Format("Word: {0}\n{1}etter: ",
-                    ShowWord(word), (attempts > 0 ? "Next l" : "L")));
+                Console.Write("Word: {0}\n{1}etter: ", ShowWord(word), (attempts > 0 ? "Next l" : "L"));
+
                 Char key = Char.ToLower(Console.ReadKey().KeyChar);
 
                 if (word.Contains(key))
@@ -206,7 +208,7 @@ namespace csharp_through_code_examples
             }
             while (!WordOpened(word));
 
-            Console.WriteLine(String.Format("You WIN!\nAttempts: {0}", attempts));
+            Console.WriteLine("You WIN!\nAttempts: {0}", attempts);
             Console.ReadLine();
         }
     }
@@ -236,11 +238,11 @@ namespace csharp_through_code_examples
         static string GoblinScream(int screamCount) =>
             string.Concat(Enumerable.Repeat("Oops! ", screamCount));
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Try to hit the enemy!\n");
 
-            while(true)
+            while (true)
             {
                 Console.Write("How many hits > ");
 
@@ -251,12 +253,12 @@ namespace csharp_through_code_examples
 
                 EnemyScreams scream = null;
                 string enemyName = String.Empty;
-                    
+
                 if (random.Next(100) % 2 == 0)
                 {
                     enemyName = "Orc";
                     scream = OrcScream;
-                } 
+                }
                 else
                 {
                     enemyName = "Goblin";
@@ -293,15 +295,15 @@ namespace csharp_through_code_examples
             }
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             Goblin goblin = new Goblin
             {
                 Hitpoints = rand.Next(20) + 10,
             };
 
-            Console.WriteLine(String.Format("You have to fight the {0} ({1} hitpoints)!\n" +
-                "To hit him you have to type 'hit'!\n", goblin.Name(), goblin.Hitpoints));
+            Console.WriteLine("You have to fight the {0} ({1} hitpoints)!\n" +
+                "To hit him you have to type 'hit'!\n", goblin.Name(), goblin.Hitpoints);
 
             while (goblin.Hitpoints > 0)
             {
@@ -313,14 +315,14 @@ namespace csharp_through_code_examples
                 {
                     goblin.Wound();
 
-                    Console.WriteLine(String.Format("You hit him! His hitponts dropped to {0}\n",
-                        goblin.Hitpoints));
+                    Console.WriteLine("You hit him! His hitponts dropped to {0}\n",
+                        goblin.Hitpoints);
                 }
                 else
                     Console.WriteLine("I did not understand you...\n");
             }
 
-            Console.WriteLine("YOU WON THIS BATTLE! Not surprisingly, but still...");
+            Console.WriteLine("YOU WON THIS BATTLE!\nNot surprisingly, but still...");
             Console.ReadLine();
         }
     }
@@ -357,7 +359,7 @@ namespace csharp_through_code_examples
             public string Swearing() => "Oh, *$?@#&!! I hate this %#@*!!";
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             Hero hero = new Hero
             {
@@ -371,8 +373,8 @@ namespace csharp_through_code_examples
                 Hitpoints = rand.Next(20) + 10,
             };
 
-            Console.WriteLine(String.Format("You have {0} hitpoints and gotta fight the {1} ({2} hitpoints)!\n" +
-                "To hit him you have to type 'attack'!\n", hero.Hitpoints, goblin.Name, goblin.Hitpoints));
+            Console.WriteLine("You have {0} hitpoints and gotta fight the {1} ({2} hitpoints)!\n" +
+                "To hit him you have to type 'attack'!\n", hero.Hitpoints, goblin.Name, goblin.Hitpoints);
 
             while ((goblin.Hitpoints > 0) && (hero.Hitpoints > 0))
             {
@@ -384,28 +386,29 @@ namespace csharp_through_code_examples
                 {
                     goblin.Wound();
 
-                    Console.WriteLine(String.Format("You hit him! His hitponts dropped to {0}",
-                        goblin.Hitpoints));
+                    Console.WriteLine("You hit him! His hitponts dropped to {0}", goblin.Hitpoints);
 
-                    if (goblin.Hitpoints > 0)
-                        Console.WriteLine(String.Format("{0}: {1}\n", goblin.Name, goblin.Swearing()));
+                    if (goblin.Hitpoints <= 0)
+                        continue;
+                    
+                    Console.WriteLine("{0}: {1}\n", goblin.Name, goblin.Swearing());
 
                     hero.Wound();
 
-                    Console.WriteLine(String.Format("{0} hit you! Your hitponts dropped to {1}",
-                        goblin.Name, hero.Hitpoints));
+                    Console.WriteLine("{0} hit you! Your hitponts dropped to {1}",
+                        goblin.Name, hero.Hitpoints);
 
                     if (hero.Hitpoints > 0)
-                        Console.WriteLine(String.Format("{0}: {1}\n", hero.Name, hero.BeautifulSpeeches()));
+                        Console.WriteLine("{0}: {1}\n", hero.Name, hero.BeautifulSpeeches());
                 }
                 else
                     Console.WriteLine("I did not understand you...\n");
             }
 
-            if (goblin.Hitpoints < 0)
-                Console.WriteLine("YOU WON THIS BATTLE!");
+            if (goblin.Hitpoints <= 0)
+                Console.WriteLine("\nYOU WON THIS BATTLE!");
             else
-                Console.WriteLine("You lost this fight...");
+                Console.WriteLine("\nYou lost this fight...");
 
             Console.ReadLine();
         }
@@ -447,7 +450,7 @@ namespace csharp_through_code_examples
             }
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             GandalfHistory();
 
@@ -531,12 +534,12 @@ namespace csharp_through_code_examples
             }
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             int distance = rand.Next(500, 3000);
 
-            Console.WriteLine(String.Format("You have to overcome the distance of {0} km!\n" +
-                "Make a choice: airplane, helicopter, car, velo, foot?", distance));
+            Console.WriteLine("You have to overcome the distance of {0} km!\n" +
+                "Make a choice: airplane, helicopter, car, velo, foot?", distance);
 
             int steps = 0;
 
@@ -556,21 +559,21 @@ namespace csharp_through_code_examples
                 distance -= step;
 
                 Console.WriteLine(movement.Sound());
-                Console.WriteLine(String.Format("You have covered {0} km!", step));
+                Console.WriteLine("You have covered {0} km!", step);
 
                 if (distance < 0)
                 {
                     distance = Math.Abs(distance);
-                    Console.WriteLine(String.Format("Overmuch! You need to go back {0} km!", distance));
+                    Console.WriteLine("Overmuch! You need to go back {0} km!", distance);
                 }
                 else if (distance == 0)
                 {
-                    Console.WriteLine(String.Format("WIN! it took you {0} steps!", steps));
+                    Console.WriteLine("WIN! it took you {0} steps!", steps);
                     break;
                 }
                 else
                 {
-                    Console.WriteLine(String.Format("{0} km left.", distance));
+                    Console.WriteLine("{0} km left.", distance);
                 }
             }
 
@@ -681,8 +684,10 @@ namespace csharp_through_code_examples
             }
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
+            Console.WriteLine("This is an epic battle!\n");
+
             while ((hero.Hitpoints > 0) && (orc.Hitpoints > 0))
             {
                 hero.Weapon = ChangeWeapon();
@@ -762,8 +767,8 @@ namespace csharp_through_code_examples
     }
 
     class Program
-    {       
-        static void Main(string[] args)
+    {
+        static void Main()
         {
             Hero hero = new Hero();
 
@@ -774,6 +779,8 @@ namespace csharp_through_code_examples
             hero.Register(enemy: goblin);
 
             string action = String.Empty;
+
+            Console.WriteLine("This is another epic battle!\n");
 
             do
             {
@@ -810,8 +817,10 @@ namespace csharp_through_code_examples
             "The secret of getting ahead is getting started",
         };
 
-        static void Main(string[] args)
+        static void Main()
         {
+            Console.WriteLine("Try to restore word order!\n");
+
             string fullPhrase = phrases[random.Next(phrases.Count)];
 
             List<string> puzzle = fullPhrase
@@ -1012,10 +1021,12 @@ namespace csharp_through_code_examples
             }
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
             do
             {
+                Console.WriteLine("The birth of heroes and villains!\nChoose type: human, elf, orc...\n");
+
                 Console.Write("Hero type > ");
                 string heroType = Console.ReadLine();
 
@@ -1151,8 +1162,10 @@ namespace csharp_through_code_examples
             }
         }
 
-        static void Main(string[] args)
+        static void Main()
         {
+            Console.WriteLine("Another birth of heroes and villains!\nChoose type: human or orc...\n");
+
             do
             {
                 Console.Write("Hero type  > ");
@@ -1182,7 +1195,7 @@ namespace csharp_through_code_examples
 
                 Console.WriteLine(hero.Discribe());
             }
-            while (true);           
+            while (true);
         }
     }
 }
