@@ -15,7 +15,7 @@
 10. [Decorator pattern](#decorator-pattern)
 11. [Factory method pattern](#factory-method-pattern)
 12. [Abstract factory pattern](#abstract-factory-pattern)
-13. [Singleton pattern](#singleton pattern)
+13. [Singleton pattern](#singleton-pattern)
 
 ## Hello World
 
