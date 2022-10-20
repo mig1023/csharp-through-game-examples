@@ -1300,12 +1300,10 @@ class Program
 
         Hero harryPotter = new Hero("Harry Potter");
         Hero dracoMalfoy = new Hero("Draco Malfoy");
-
-        ConsoleKeyInfo action;
-
+        
         do
         {
-            action = Console.ReadKey();
+            ConsoleKeyInfo action = Console.ReadKey();
 
             if (action.Key == ConsoleKey.H)
                 fight.SetAttack(new AttackCommand(harryPotter));
