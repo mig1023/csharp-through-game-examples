@@ -1759,11 +1759,11 @@ class Program
 {
     abstract class Line
     {
-        protected string name;
-        public Directory Parent;
+        protected string Name;
 
-        public Line(string name) =>
-            this.name = name;
+        public Directory Parent { get; set; }
+
+        public Line(string name) => Name = name;
 
         public abstract void Display(int nesting);
     }
@@ -1782,7 +1782,7 @@ class Program
 
         public override void Display(int nesting)
         {
-            Console.WriteLine(new String(' ', nesting) + name);
+            Console.WriteLine(new String(' ', nesting) + Name);
 
             foreach (Line component in children)
                 component.Display(nesting + 2);
@@ -1794,7 +1794,7 @@ class Program
         public File(string name) : base(name) { }
 
         public override void Display(int nesting) =>
-            Console.WriteLine(new String(' ', nesting) + name);
+            Console.WriteLine(new String(' ', nesting) + Name);
     }
 
     static void Main()
@@ -1820,6 +1820,7 @@ class Program
             {
                 nesting += 1;
                 filesInCurrent = 0;
+
                 Directory newComposite = new Directory("Directory");
                 current.Add(newComposite);
                 current = newComposite;
@@ -1828,6 +1829,7 @@ class Program
             {
                 files += 1;
                 filesInCurrent += 1;
+
                 current.Add(new File(String.Format("File {0}", files)));
                 nestingLevel.Add(files, nesting);
             }
