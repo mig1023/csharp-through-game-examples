@@ -433,7 +433,7 @@ namespace csharp_through_code_examples
 {
     class Program
     {
-                private class Gandalf : IDisposable
+        private class Gandalf : IDisposable
         {
             public Gandalf() => Console.WriteLine("[constructor]\t\tGandalf was born in 2500 of the Third Age!");
 
