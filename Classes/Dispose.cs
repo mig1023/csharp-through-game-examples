@@ -6,11 +6,13 @@ namespace csharp_through_code_examples
     {
         private class Gandalf : IDisposable
         {
-            public Gandalf() => Console.WriteLine("Gandalf was born in 2500 of the Third Age!");
+            public Gandalf() => Console.WriteLine("[constructor]\t\tGandalf was born in 2500 of the Third Age!");
 
-            public void Dispose() => Console.WriteLine("Hey, Gandalf, you have to go!");
+            public void Dispose() => Console.WriteLine("[dispose call]\t\tHey, Gandalf, you have to go!");
 
-            ~Gandalf() => Console.WriteLine("Gandalf sailed away at 3200 of the Third Age!");
+            public void OrdinaryMagic() => Console.WriteLine("\t\t\tGandalf does something good!");
+
+            ~Gandalf() => Console.WriteLine("[finalizer]\t\tGandalf sailed away at 3200 of the Third Age!");
         }
 
         static void GandalfHistory()
@@ -25,19 +27,25 @@ namespace csharp_through_code_examples
                     break;
                 }
                 else
-                    Console.WriteLine("Gandalf does something good!");
+                {
+                    gandalf.OrdinaryMagic();
+                }
             }
+        }
+
+        static void GarbageCleaning()
+        {
+            Console.WriteLine("[garbage collector]\tThis is end of the Gandalf story!");
+            GC.Collect();
         }
 
         static void Main()
         {
             GandalfHistory();
 
-            Console.WriteLine("This is end of the Gandalf story!");
+            GarbageCleaning();
 
-            GC.Collect();
-
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
