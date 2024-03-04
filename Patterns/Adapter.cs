@@ -81,7 +81,7 @@ class Program
 
     static void Main()
     {
-        Console.WriteLine("Search for a Soviet spy!\n");
+        Console.WriteLine("Search for a Soviet spy!\nbased on 'Seventeen Moments of Spring' (1973)\n");
 
         Random rand = new Random();
 
@@ -128,15 +128,18 @@ class Program
             bool okResponse = int.TryParse(responseLine, out int response);
 
             if (!okResponse || (response > germanOfficers.Count) || (response < 1))
+            {
                 Console.WriteLine("Invalid response! Try again!");
-
-            else if (germanOfficers[response - 1].Name() == "Shtirlits")
+            }
+            else if (germanOfficers[response - 1] is GermanOfficer)
+            {
+                Console.WriteLine("No. Try again!");
+            }
+            else
             {
                 Console.WriteLine("YES! You WIN!");
                 break;
             }
-            else
-                Console.WriteLine("No. Try again!");
         }
         while (true);
     }
