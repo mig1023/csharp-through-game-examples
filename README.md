@@ -1580,7 +1580,7 @@ class Program
 
     static void Main()
     {
-        Console.WriteLine("Fight against Evel Orc!");
+        Console.WriteLine("Fight against Evil Orc!");
         Console.WriteLine("'P' - punch, 'K' - kick, 'H' - headbutt");
         Console.WriteLine("'E' - elbow strike, 'N' - knee strike, 'C' - combo");
 
