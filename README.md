@@ -1249,7 +1249,7 @@ namespace csharp_through_code_examples
                 Console.WriteLine("{0} bottles of beer on " +
                     "the wall", bottles);
                 Console.WriteLine("{0} bottles of beer!", bottles);
-                Console.WriteLine("Take one down, pass it around", bottles);
+                Console.WriteLine("Take one down, pass it around");
 
                 Counter bottleCounter = Counter.NewInstance();
                 bottles = bottleCounter.Get();
