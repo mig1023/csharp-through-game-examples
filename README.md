@@ -104,7 +104,7 @@ namespace csharp_through_code_examples
 
         private static string Variants(string correct)
         {
-            List<string> types = new List<string> { correct };
+            var types = new List<string> { correct };
 
             for (int i = 1; i < 3; i++)
             {
@@ -119,25 +119,26 @@ namespace csharp_through_code_examples
                 types.Add(nextVariant);
             }
 
-            List<string> randTypes = types.OrderBy(x => random.Next()).ToList();
+            var randTypes = types.OrderBy(x => random.Next()).ToList();
 
             return String.Format("{0}, {1} or {2}?", randTypes[0], randTypes[1], randTypes[2]);
         }
 
         static void Main()
         {
-            int win = 0, round = 0;
+            var win = 0;
+            var round = 0;
 
             Console.WriteLine("Try to guess the type of the variable by value!\n");
 
             while (round < 5)
             {
-                string test = AllTypes.ElementAt(random.Next(AllTypes.Count)).Key;
-                string testLine = AllTypes[test][random.Next(AllTypes[test].Count)];
+                var test = AllTypes.ElementAt(random.Next(AllTypes.Count)).Key;
+                var testLine = AllTypes[test][random.Next(AllTypes[test].Count)];
 
                 Console.Write("Var: {0}\nThis is: {1}\n> ", testLine, Variants(test));
 
-                string response = Console.ReadLine();
+                var response = Console.ReadLine();
 
                 if (response == test)
                 {
@@ -150,7 +151,9 @@ namespace csharp_through_code_examples
                     win += 1;
                 }
                 else
+                {
                     Console.WriteLine("No ({0})\n", test);
+                }
 
                 round += 1;
             }
