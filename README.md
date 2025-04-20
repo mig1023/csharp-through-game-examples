@@ -188,8 +188,10 @@ namespace csharp_through_code_examples
         private static string ShowWord(string word)
         {
             for (int i = 0; i < word.Length; i++)
+            {
                 if (!Opened.Contains(word[i]))
                     word = word.Replace(word[i], '*');
+            }
 
             return word;
         }
@@ -201,14 +203,14 @@ namespace csharp_through_code_examples
         {
             Console.WriteLine("Try to guess the word!\n");
 
-            string word = SecretWords[random.Next(SecretWords.Count)];
-            int attempts = 0;
+            var word = SecretWords[random.Next(SecretWords.Count)];
+            var attempts = 0;
 
             do
             {
                 Console.Write("Word: {0}\n{1}etter: ", ShowWord(word), (attempts > 0 ? "Next l" : "L"));
 
-                Char key = Char.ToLower(Console.ReadKey().KeyChar);
+                var key = Char.ToLower(Console.ReadKey().KeyChar);
 
                 if (word.Contains(key))
                 {
@@ -216,8 +218,10 @@ namespace csharp_through_code_examples
                     Opened.Add(key);
                 }
                 else
+                {
                     Console.WriteLine("\nNo...\n");
-
+                }
+                    
                 attempts += 1;
             }
             while (!WordOpened(word));
