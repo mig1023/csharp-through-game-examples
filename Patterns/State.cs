@@ -46,22 +46,24 @@ class Program
     {
         public Healthbar Health { get; set; }
 
-        public EvilOrc(Healthbar startState) => Health = startState;
+        public EvilOrc(Healthbar startState) => 
+            Health = startState;
 
-        public void Punch() => Health.Wound(this);
+        public void Punch() => 
+            Health.Wound(this);
     }
 
     static void Main()
     {
-        Console.WriteLine("Fight against Evel Orc!");
+        Console.WriteLine("Fight against Evil Orc!");
         Console.WriteLine("Ented 'punch' for attack...\n");
 
-        EvilOrc orc = new EvilOrc(new Healthy());
+        var orc = new EvilOrc(new Healthy());
 
         do
         {
             Console.Write("> ");
-            string action = Console.ReadLine();
+            var action = Console.ReadLine();
 
             if (String.IsNullOrEmpty(action))
             {
@@ -73,7 +75,7 @@ class Program
 
                 if (orc.Health is Killed)
                     Console.WriteLine("YOU WIN!\nNot surprisingly, but still...");
-            }    
+            }
             else
             {
                 Console.WriteLine("I did not understand you...");
