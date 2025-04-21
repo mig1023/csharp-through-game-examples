@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
@@ -39,16 +38,16 @@ class Program
         foreach (Hero hero in heroes)
             Console.WriteLine("\t{0}. {1} with {2}.", ++i, hero.Name, hero.Weapon);
     }
-    
+
     static void Main()
     {
-        List<Orc> orcs = new List<Orc>();
+        var orcs = new List<Orc>();
 
-        orcs.Add(new Orc { Name = "Azog", Age = 5, Weapon = "sword", VillainyLevel = 10});
+        orcs.Add(new Orc { Name = "Azog", Age = 5, Weapon = "sword", VillainyLevel = 10 });
         orcs.Add(new Orc { Name = "Ugluk", Age = 2, Weapon = "axe", VillainyLevel = 5 });
         orcs.Add(new Orc { Name = "Grishnakh", Age = 3, Weapon = "knife", VillainyLevel = 6 });
 
-        Dictionary<string, Elf> elfs = new Dictionary<string, Elf>();
+        var elfs = new Dictionary<string, Elf>();
 
         elfs.Add("Legolas", new Elf { Name = "Legolas", Age = 1000, Weapon = "bow", NobilityLevel = 9 });
         elfs.Add("Galadriel", new Elf { Name = "Galadriel", Age = 5000, Weapon = "magic", NobilityLevel = 10 });
