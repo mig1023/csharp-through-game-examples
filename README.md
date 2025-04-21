@@ -1714,7 +1714,6 @@ class Program
 
 ```c#
 using System;
-using System.Collections.Generic;
 
 class Program
 {
@@ -1722,42 +1721,53 @@ class Program
     {
         public abstract string SpellName();
 
-        public string Speak() => String.Format("You say: {0}...", SpellName());
+        public string Speak() =>
+            String.Format("You say: {0}...", SpellName());
 
-        public string WandGesture() => "You wave your wand...";
+        public string WandGesture() =>
+            "You wave your wand...";
 
         public abstract string MagicEffect();
     }
 
     class Accio : Spell
     {
-        public override string SpellName() => "Accio";
-        public override string MagicEffect() => "Objects are flying towards us!";
+        public override string SpellName() =>
+            "Accio";
+        public override string MagicEffect() =>
+            "Objects are flying towards us!";
     }
 
     class Reducto : Spell
     {
-        public override string SpellName() => "Reducto";
-        public override string MagicEffect() => "Objects are broken and destroyed!";
+        public override string SpellName() =>
+            "Reducto";
+        public override string MagicEffect() =>
+            "Objects are broken and destroyed!";
     }
 
     class Lumos : Spell
     {
-        public override string SpellName() => "Lumos";
-        public override string MagicEffect() => "The bright light is on!";
+        public override string SpellName() =>
+            "Lumos";
+        public override string MagicEffect() =>
+            "The bright light is on!";
     }
-    
+
     class Riddikulus : Spell
     {
-        public override string SpellName() => "Riddikulus";
-        public override string MagicEffect() => "Boggart was ridiculed!";
+        public override string SpellName() =>
+            "Riddikulus";
+        public override string MagicEffect() =>
+            "Boggart was ridiculed!";
     }
 
     static void Main()
     {
-        Console.WriteLine("Hi!\nMy name is Professor Lupin!\nNow we will learn a few spells!");
+        Console.WriteLine("Hi!\nMy name is Professor Lupin!\n" +
+            "Now we will learn a few spells!");
 
-        List<Spell> spells = new List<Spell>
+        var spells = new List<Spell>
         {
             new Accio(),
             new Reducto(),
