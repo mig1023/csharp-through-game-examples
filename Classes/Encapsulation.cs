@@ -32,9 +32,7 @@ namespace csharp_through_code_examples
             {
                 Console.Write("> ");
 
-                string action = Console.ReadLine();
-
-                if (action.ToLower() == "hit")
+                if (Console.ReadLine().ToLower() == "hit")
                 {
                     goblin.Wound();
 
@@ -42,7 +40,9 @@ namespace csharp_through_code_examples
                         goblin.Hitpoints);
                 }
                 else
+                {
                     Console.WriteLine("I did not understand you...\n");
+                }
             }
 
             Console.WriteLine("YOU WON THIS BATTLE!\nNot surprisingly, but still...");
