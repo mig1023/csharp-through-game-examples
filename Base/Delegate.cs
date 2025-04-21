@@ -24,17 +24,18 @@ namespace csharp_through_code_examples
 
             while (true)
             {
+                EnemyScreams scream = null;
+
                 Console.Write("How many hits > ");
 
-                bool success = int.TryParse(Console.ReadLine(), out int hits);
+                var success = int.TryParse(Console.ReadLine(), out int hits);
+                var enemyName = String.Empty;
 
                 if (!success || (hits <= 0))
+                {
                     break;
-
-                EnemyScreams scream = null;
-                string enemyName = String.Empty;
-
-                if (random.Next(100) % 2 == 0)
+                }
+                else if (random.Next(100) % 2 == 0)
                 {
                     enemyName = "Orc";
                     scream = OrcScream;
