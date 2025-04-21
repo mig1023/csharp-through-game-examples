@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace csharp_through_code_examples
 {
@@ -20,9 +18,9 @@ namespace csharp_through_code_examples
         {
             Console.WriteLine("Try to restore word order!\n");
 
-            string fullPhrase = phrases[random.Next(phrases.Count)];
+            var fullPhrase = phrases[random.Next(phrases.Count)];
 
-            List<string> puzzle = fullPhrase
+            var puzzle = fullPhrase
                 .Split(' ')
                 .Select(x => x.Trim())
                 .OrderBy(a => random.Next())
@@ -33,7 +31,7 @@ namespace csharp_through_code_examples
             for (int i = 0; i < puzzle.Count(); i++)
                 Console.WriteLine("{0}: {1}", i + 1, puzzle[i]);
 
-            string responseLine = String.Empty;
+            var responseLine = String.Empty;
 
             do
             {
@@ -44,7 +42,7 @@ namespace csharp_through_code_examples
                 if (String.IsNullOrEmpty(responseLine))
                     break;
 
-                List<string> responseStrings = responseLine.Split(' ').ToList();
+                var responseStrings = responseLine.Split(' ').ToList();
 
                 if (responseStrings.Count() < puzzle.Count)
                 {
@@ -52,10 +50,11 @@ namespace csharp_through_code_examples
                     continue;
                 }
 
-                List<int> response = responseStrings.Select(x => int.Parse(x)).ToList();
+                var response = responseStrings.Select(x => int.Parse(x)).ToList();
 
-                Component newPhrase = new Component();
-                Decorator newDecorator = null, prevDecorator = null;
+                var newPhrase = new Component();
+                Decorator newDecorator = null;
+                Decorator prevDecorator = null;
 
                 foreach (int word in response)
                 {
@@ -64,7 +63,7 @@ namespace csharp_through_code_examples
                     prevDecorator = newDecorator;
                 }
 
-                string responsePhrase = newDecorator.Operation().Trim();
+                var responsePhrase = newDecorator.Operation().Trim();
 
                 Console.WriteLine("Result: {0}", responsePhrase);
 
@@ -74,7 +73,9 @@ namespace csharp_through_code_examples
                     responseLine = String.Empty;
                 }
                 else
+                {
                     Console.WriteLine("Fail! Try again!");
+                }
             }
             while (!String.IsNullOrEmpty(responseLine));
         }
