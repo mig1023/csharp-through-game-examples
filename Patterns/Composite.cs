@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
@@ -9,7 +8,8 @@ class Program
 
         public Directory Parent { get; set; }
 
-        public Line(string name) => Name = name;
+        public Line(string name) =>
+            Name = name;
 
         public abstract void Display(int nesting);
     }
@@ -45,22 +45,24 @@ class Program
 
     static void Main()
     {
-        int files = 0, filesInCurrent = 0, nesting = 0;
+        var files = 0;
+        var filesInCurrent = 0;
+        var nesting = 0;
 
-        Random rand = new Random();
-        Directory root = new Directory("root");
-        Directory current = root;
-        Dictionary<int, int> nestingLevel = new Dictionary<int, int>();
+        var rand = new Random();
+        var root = new Directory("root");
+        var current = root;
+        var nestingLevel = new Dictionary<int, int>();
 
         Console.Write("Nesting level game!\n\nDifficulty level (number of files or folders)? ");
-        bool difficultyOk = int.TryParse(Console.ReadLine(), out int difficulty);
+        var difficultyOk = int.TryParse(Console.ReadLine(), out int difficulty);
 
         if (!difficultyOk)
             difficulty = 10;
 
         for (int i = 0; i < difficulty; i++)
         {
-            int action = rand.Next(3);
+            var action = rand.Next(3);
 
             if (action == 0)
             {
@@ -93,18 +95,18 @@ class Program
 
         for (int r = 0; r < 3; r++)
         {
-            int file = rand.Next(files) + 1;
+            var file = rand.Next(files) + 1;
 
             do
             {
                 Console.Write("\nWhat is the nesting level of file {0}? ", file);
 
-                string responseLine = Console.ReadLine();
+                var responseLine = Console.ReadLine();
 
                 if (String.IsNullOrEmpty(responseLine))
                     Environment.Exit(0);
 
-                bool responseOk = int.TryParse(responseLine, out int response);
+                var responseOk = int.TryParse(responseLine, out int response);
 
                 if (!responseOk)
                 {
@@ -120,7 +122,8 @@ class Program
                     break;
                 }
 
-            } while (true);
+            }
+            while (true);
         }
     }
 }
