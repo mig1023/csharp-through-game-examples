@@ -968,7 +968,6 @@ namespace csharp_through_code_examples
 
 ```c#
 using System;
-using System.Collections.Generic;
 
 namespace csharp_through_code_examples
 {
@@ -987,8 +986,11 @@ namespace csharp_through_code_examples
 
         public class Human : Hero
         {
-            public Human(string name) => Name = name;
-            public override string Description() => String.Format("human {0}", Name);
+            public Human(string name) =>
+                Name = name;
+
+            public override string Description() =>
+                String.Format("human {0}", Name);
         }
 
         public class HumanCreator : HeroCreator
@@ -1009,8 +1011,11 @@ namespace csharp_through_code_examples
 
         public class Elf : Hero
         {
-            public Elf(string name) => Name = name;
-            public override string Description() => String.Format("elf {0}", Name);
+            public Elf(string name) =>
+                Name = name;
+
+            public override string Description() =>
+                String.Format("elf {0}", Name);
         }
 
         public class ElfCreator : HeroCreator
@@ -1031,8 +1036,11 @@ namespace csharp_through_code_examples
 
         public class Orc : Hero
         {
-            public Orc(string name) => Name = name;
-            public override string Description() => String.Format("orc {0}", Name);
+            public Orc(string name) =>
+                Name = name;
+
+            public override string Description() =>
+                String.Format("orc {0}", Name);
         }
 
         public class OrcCreator : HeroCreator
@@ -1073,15 +1081,16 @@ namespace csharp_through_code_examples
         {
             do
             {
-                Console.WriteLine("The birth of heroes and villains!\nChoose type: human, elf, orc...\n");
+                Console.WriteLine("The birth of heroes and villains!\n" +
+                    "Choose type: human, elf, orc...\n");
 
                 Console.Write("Hero type > ");
-                string heroType = Console.ReadLine();
+                var heroType = Console.ReadLine();
 
                 if (String.IsNullOrEmpty(heroType))
                     break;
 
-                HeroCreator heroFactory = Creator(heroType);
+                var heroFactory = Creator(heroType);
 
                 if (heroFactory == null)
                 {
