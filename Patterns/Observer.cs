@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace csharp_through_code_examples
 {
@@ -19,8 +18,12 @@ namespace csharp_through_code_examples
     {
         List<Observer> enemyList = new List<Observer>();
 
-        public void Register(Observer enemy) => enemyList.Add(enemy);
-        public void Remove(Observer enemy) => enemyList.Remove(enemy);
+        public void Register(Observer enemy) =>
+            enemyList.Add(enemy);
+
+        public void Remove(Observer enemy) =>
+            enemyList.Remove(enemy);
+
         public void Hit(int hitpoints)
         {
             foreach (Observer enemy in enemyList)
@@ -32,7 +35,8 @@ namespace csharp_through_code_examples
     {
         int Hitpoints { get; set; }
 
-        public Orc(int hitpoints) => Hitpoints = hitpoints;
+        public Orc(int hitpoints) =>
+            Hitpoints = hitpoints;
 
         public void Update(int hitpoints)
         {
@@ -47,7 +51,8 @@ namespace csharp_through_code_examples
     {
         int Hitpoints { get; set; }
 
-        public Goblin(int hitpoints) => Hitpoints = hitpoints;
+        public Goblin(int hitpoints) =>
+            Hitpoints = hitpoints;
 
         public void Update(int hitpoints)
         {
@@ -62,15 +67,14 @@ namespace csharp_through_code_examples
     {
         static void Main()
         {
-            Hero hero = new Hero();
-
-            Orc orc = new Orc(hitpoints: 30);
-            Goblin goblin = new Goblin(hitpoints: 20);
+            var hero = new Hero();
+            var orc = new Orc(hitpoints: 30);
+            var goblin = new Goblin(hitpoints: 20);
 
             hero.Register(enemy: orc);
             hero.Register(enemy: goblin);
 
-            string action = String.Empty;
+            var action = String.Empty;
 
             Console.WriteLine("This is another epic battle!\n");
 
