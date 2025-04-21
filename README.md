@@ -1288,11 +1288,13 @@ namespace csharp_through_code_examples
 
             private Counter() { }
 
-            public static Counter NewInstance() => instance;
+            public static Counter NewInstance() =>
+                instance;
 
             private int counter = 99;
 
-            public int Get() => --instance.counter;
+            public int Get() =>
+                --instance.counter;
         }
 
         static void Main()
