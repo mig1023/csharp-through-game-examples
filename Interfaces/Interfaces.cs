@@ -67,12 +67,12 @@ namespace csharp_through_code_examples
 
         static void Main()
         {
-            int distance = rand.Next(500, 3000);
+            var distance = rand.Next(500, 3000);
 
             Console.WriteLine("You have to overcome the distance of {0} km!\n" +
                 "Make a choice: airplane, helicopter, car, velo, foot?", distance);
 
-            int steps = 0;
+            var steps = 0;
 
             while (true)
             {
@@ -80,12 +80,12 @@ namespace csharp_through_code_examples
 
                 Console.Write("\n> ");
 
-                Movement movement = Transport(Console.ReadLine());
+                var movement = Transport(Console.ReadLine());
 
                 if (movement == null)
                     continue;
 
-                int step = movement.Move();
+                var step = movement.Move();
 
                 distance -= step;
 
