@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 namespace csharp_through_code_examples
 {
@@ -21,7 +20,8 @@ namespace csharp_through_code_examples
                 Description = factory.SetDescription();
             }
 
-            public string Discribe() => String.Format("{0} ({1} hitpoints), {2}{3}",
+            public string Discribe() =>
+                String.Format("{0} ({1} hitpoints), {2}{3}",
                 Name, Hitpoints, Information, Description.Get());
         }
 
@@ -40,12 +40,14 @@ namespace csharp_through_code_examples
 
         public class GoodPersonage : AbstractrDescription
         {
-            public override string Get() => ", this is good guy!";
+            public override string Get() =>
+                ", this is good guy!";
         }
 
         public class BadPersonage : AbstractrDescription
         {
-            public override string Get() => ", this is bad guy!";
+            public override string Get() =>
+                ", this is bad guy!";
         }
 
         public class HumanFactory : HeroFactory
@@ -54,7 +56,8 @@ namespace csharp_through_code_examples
             private List<string> names = new List<string> { "Aragorn", "Boromir", "Faramir" };
             private static int nameIndex = -1;
 
-            public HumanFactory(string hisWeapon) => weapon = hisWeapon;
+            public HumanFactory(string hisWeapon) =>
+                weapon = hisWeapon;
 
             public override string GetName()
             {
@@ -62,9 +65,14 @@ namespace csharp_through_code_examples
                 return nameIndex >= names.Count ? String.Empty : names[nameIndex];
             }
 
-            public override int GetHitpoints() => 10;
-            public override string GetWeapon() => String.Format("with his beautiful {0}", weapon);
-            public override AbstractrDescription SetDescription() => new GoodPersonage();
+            public override int GetHitpoints() =>
+                10;
+
+            public override string GetWeapon() =>
+                String.Format("with his beautiful {0}", weapon);
+
+            public override AbstractrDescription SetDescription() =>
+                new GoodPersonage();
         }
 
         public class OrcFactory : HeroFactory
@@ -81,9 +89,14 @@ namespace csharp_through_code_examples
                 return nameIndex >= names.Count ? String.Empty : names[nameIndex];
             }
 
-            public override int GetHitpoints() => 12;
-            public override string GetWeapon() => String.Format("with his hideous {0}", weapon);
-            public override AbstractrDescription SetDescription() => new BadPersonage();
+            public override int GetHitpoints() =>
+                12;
+
+            public override string GetWeapon() =>
+                String.Format("with his hideous {0}", weapon);
+
+            public override AbstractrDescription SetDescription() =>
+                new BadPersonage();
         }
 
         public static HeroFactory GetFactory(string type, string weapon)
@@ -103,20 +116,21 @@ namespace csharp_through_code_examples
 
         static void Main()
         {
-            Console.WriteLine("Another birth of heroes and villains!\nChoose type: human or orc...\n");
+            Console.WriteLine("Another birth of heroes and villains!\n" +
+                "Choose type: human or orc...\n");
 
             do
             {
                 Console.Write("Hero type  > ");
-                string heroType = Console.ReadLine();
+                var heroType = Console.ReadLine();
 
                 Console.Write("His weapon > ");
-                string heroWeapon = Console.ReadLine();
+                var heroWeapon = Console.ReadLine();
 
                 if (String.IsNullOrEmpty(heroType) || String.IsNullOrEmpty(heroWeapon))
                     break;
 
-                HeroFactory heroFactory = GetFactory(heroType, heroWeapon);
+                var heroFactory = GetFactory(heroType, heroWeapon);
 
                 if (heroFactory == null)
                 {
@@ -124,7 +138,7 @@ namespace csharp_through_code_examples
                     continue;
                 }
 
-                Hero hero = new Hero(heroFactory);
+                var hero = new Hero(heroFactory);
 
                 if (String.IsNullOrEmpty(hero.Name))
                 {
