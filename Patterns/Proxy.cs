@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
@@ -7,7 +6,7 @@ class Program
 
     abstract class Pazzle
     {
-        protected bool IsOpened { get; set; } 
+        protected bool IsOpened { get; set; }
         abstract public void Open();
         abstract public bool IsOpen();
         abstract public int GetNear();
@@ -23,16 +22,22 @@ class Program
             Near = near;
         }
 
-        public override void Open() => IsOpened = true;
-        public override bool IsOpen() => IsOpened;
-        public override int GetNear() => Near;
+        public override void Open() =>
+            IsOpened = true;
+
+        public override bool IsOpen() =>
+            IsOpened;
+
+        public override int GetNear() =>
+            Near;
     }
 
     class Bomb : Pazzle
     {
         EmptyPazzle emptyPazzle;
 
-        public Bomb(int near) => emptyPazzle = new EmptyPazzle(near);
+        public Bomb(int near) =>
+            emptyPazzle = new EmptyPazzle(near);
 
         public override void Open()
         {
@@ -40,9 +45,11 @@ class Program
             emptyPazzle.Open();
         }
 
-        public override bool IsOpen() => emptyPazzle.IsOpen();
+        public override bool IsOpen() =>
+            emptyPazzle.IsOpen();
 
-        public override int GetNear() => emptyPazzle.GetNear();
+        public override int GetNear() =>
+            emptyPazzle.GetNear();
     }
 
     private static void Show()
@@ -51,16 +58,21 @@ class Program
 
         foreach (Pazzle Pazzle in Pazzles)
         {
-            int near = Pazzle.GetNear();
-
+            var near = Pazzle.GetNear();
             string symbol;
 
             if (!Pazzle.IsOpen())
+            {
                 symbol = " X   ";
+            }
             else if (near == 2)
+            {
                 symbol = "BOMB ";
+            }
             else
+            {
                 symbol = String.Format(" {0}   ", near);
+            }
 
             Console.Write(symbol);
         }
@@ -69,31 +81,33 @@ class Program
 
     static void Main()
     {
-        Random rand = new Random();
-        int bombPosition = rand.Next(8);
+        var rand = new Random();
+        var bombPosition = rand.Next(8);
 
         Console.WriteLine("Mini Minesweeper\n");
 
         for (int i = 0; i < 8; i++)
         {
             if (i == bombPosition)
+            {
                 Pazzles.Add(new Bomb(2));
+            }
             else
             {
-                int near = (i == bombPosition + 1) || (i == bombPosition - 1) ? 1 : 0;
+                var near = (i == bombPosition + 1) || (i == bombPosition - 1) ? 1 : 0;
                 Pazzles.Add(new EmptyPazzle(near));
             }
         }
 
         int newPazzle;
-        int openedPazzles = 0;
+        var openedPazzles = 0;
 
         do
         {
             Show();
 
             Console.Write("\n > ");
-            string action = Console.ReadLine();
+            var action = Console.ReadLine();
 
             if (String.IsNullOrEmpty(action))
             {
@@ -108,7 +122,7 @@ class Program
                 Pazzles[newPazzle - 1].Open();
                 openedPazzles += 1;
 
-                bool fail = newPazzle == (bombPosition + 1);
+                var fail = newPazzle == (bombPosition + 1);
 
                 if (fail || (openedPazzles == 7))
                 {
