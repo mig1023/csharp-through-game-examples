@@ -39,13 +39,14 @@ class Program
     {
         Hero hero;
 
-        public Combo(Hero setHero) => hero = setHero;
+        public Combo(Hero setHero) =>
+            hero = setHero;
 
         public int Make()
         {
             Console.WriteLine("Combo...");
 
-            int damage = 0;
+            var damage = 0;
 
             Console.Write("...");
             damage += hero.Kick();
@@ -69,7 +70,7 @@ class Program
         public int Hitpoints
         {
             get => _hitponts;
-            
+
             set
             {
                 _hitponts = value;
@@ -77,7 +78,8 @@ class Program
             }
         }
 
-        public EvilOrc(int setHitpoints) => _hitponts = setHitpoints;
+        public EvilOrc(int setHitpoints) =>
+            _hitponts = setHitpoints;
     }
 
     static void Main()
@@ -86,36 +88,44 @@ class Program
         Console.WriteLine("'P' - punch, 'K' - kick, 'H' - headbutt");
         Console.WriteLine("'E' - elbow strike, 'N' - knee strike, 'C' - combo");
 
-        EvilOrc orc = new EvilOrc(50);
-        Hero hero = new Hero();
-
-        Combo combo = new Combo(hero);
+        var orc = new EvilOrc(50);
+        var hero = new Hero();
+        var combo = new Combo(hero);
 
         do
         {
-            ConsoleKeyInfo action = Console.ReadKey();
+            var action = Console.ReadKey();
             Console.WriteLine();
 
             if (action.Key == ConsoleKey.P)
+            {
                 orc.Hitpoints -= hero.Punch();
-
+            }
             else if (action.Key == ConsoleKey.K)
+            {
                 orc.Hitpoints -= hero.Kick();
-
+            }
             else if (action.Key == ConsoleKey.H)
+            {
                 orc.Hitpoints -= hero.Headbutt();
-
+            }
             else if (action.Key == ConsoleKey.E)
+            {
                 orc.Hitpoints -= hero.ElbowStrike();
-
+            }
             else if (action.Key == ConsoleKey.N)
-                orc.Hitpoints -=  hero.KneeStrike();
-
+            {
+                orc.Hitpoints -= hero.KneeStrike();
+            }
             else if (action.Key == ConsoleKey.C)
+            {
                 orc.Hitpoints -= combo.Make();
-
+            }
             else
+            {
                 Console.WriteLine("I did not understand you...\n");
+            }
+                
         }
         while (orc.Hitpoints > 0);
 
