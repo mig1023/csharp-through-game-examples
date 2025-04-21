@@ -1412,8 +1412,6 @@ class Program
 
 ```c#
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 class Program
 {
@@ -1435,11 +1433,14 @@ class Program
             rank = setRank;
         }
 
-        public string Greeting() => String.Format("Jawohl! Mein Name ist");
+        public string Greeting() =>
+            String.Format("Jawohl! Mein Name ist");
 
-        public string Name() => name;
+        public string Name() =>
+            name;
 
-        public string GermanMilitaryRank() => rank;
+        public string GermanMilitaryRank() =>
+            rank;
     }
 
     class SovietOfficer
@@ -1455,22 +1456,28 @@ class Program
             fakeName = setFakeName;
         }
 
-        public string Greeting() => String.Format("Здравия желаю! Меня зовут");
+        public string Greeting() =>
+            String.Format("Здравия желаю! Меня зовут");
 
-        public string Name() => name;
+        public string Name() =>
+            name;
 
-        public string FakeName() => fakeName;
+        public string FakeName() =>
+            fakeName;
 
-        public string SovietMilitaryRank() => rank;
+        public string SovietMilitaryRank() =>
+            rank;
     }
 
     class SpyDisguise : IGermanOfficer
     {
         SovietOfficer officer;
 
-        public SpyDisguise(SovietOfficer setOfficer) => officer = setOfficer;
+        public SpyDisguise(SovietOfficer setOfficer) =>
+            officer = setOfficer;
 
-        public string Greeting() => String.Format("Jawohl! Mein Name ist");
+        public string Greeting() =>
+            String.Format("Jawohl! Mein Name ist");
 
         public string Name()
         {
@@ -1489,16 +1496,18 @@ class Program
 
             return newName;
         }
-        public string GermanMilitaryRank() => "Standartenführer";
+        public string GermanMilitaryRank() =>
+            "Standartenführer";
     }
 
     static void Main()
     {
-        Console.WriteLine("Search for a Soviet spy!\nbased on 'Seventeen Moments of Spring' (1973)\n");
+        Console.WriteLine("Search for a Soviet spy!\n" +
+            "based on 'Seventeen Moments of Spring' (1973)\n");
 
-        Random rand = new Random();
+        var rand = new Random();
 
-        SovietOfficer sovietOfficer = new SovietOfficer("Максим Максимович Исаев", "полковник", "Штирлиц");
+        var sovietOfficer = new SovietOfficer("Максим Максимович Исаев", "полковник", "Штирлиц");
 
         Console.WriteLine("Soviet spy: {0} {1} {2} (моя легенда: {3})",
             sovietOfficer.Greeting(),
@@ -1506,7 +1515,7 @@ class Program
             sovietOfficer.Name(),
             sovietOfficer.FakeName());
 
-        List<IGermanOfficer> germanOfficers = new List<IGermanOfficer>();
+        var germanOfficers = new List<IGermanOfficer>();
 
         germanOfficers.Add(new GermanOfficer("Müller", "Gruppenführer"));
         germanOfficers.Add(new GermanOfficer("Schellenberg", "Brigadeführer"));
@@ -1514,11 +1523,13 @@ class Program
         germanOfficers.Add(new GermanOfficer("Wolff", "Obergruppenführer"));
         germanOfficers.Add(new SpyDisguise(sovietOfficer));
 
-        germanOfficers = germanOfficers.OrderBy(x => rand.Next()).ToList();
+        germanOfficers = germanOfficers
+            .OrderBy(x => rand.Next())
+            .ToList();
 
         Console.WriteLine("\nGerman officers:");
 
-        int i = 0;
+        var i = 0;
 
         foreach (IGermanOfficer germanOfficer in germanOfficers)
         {
@@ -1538,7 +1549,7 @@ class Program
             if (String.IsNullOrEmpty(responseLine))
                 break;
 
-            bool okResponse = int.TryParse(responseLine, out int response);
+            var okResponse = int.TryParse(responseLine, out int response);
 
             if (!okResponse || (response > germanOfficers.Count) || (response < 1))
             {
