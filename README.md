@@ -24,6 +24,7 @@
 19. [Composite pattern](#composite-pattern)
 20. [State pattern](#state-pattern)
 21. [Proxy pattern](#proxy-pattern)
+22. [Dependency injection](#dependency-injection)
 
 ## Hello World
 
@@ -2223,5 +2224,144 @@ class Program
         }
         while (true);
     }
+}
+```
+## Dependency injection
+
+```c#
+using System;
+using Microsoft.Extensions.DependencyInjection;
+
+public interface ICharacter
+{
+    string Name { get; }
+
+    string Hit(ConsoleKey key, out int damage);
+
+    string Wound(int damage);
+
+    bool IsAlive();
+}
+
+public class Character : ICharacter
+{
+    private int _hitpoints = 20;
+
+    public string Name { get; }
+
+    private Random _random = new Random();
+
+    protected Character(string name)
+    {
+        Name = name;
+    }
+
+    public string Hit(ConsoleKey key, out int damage)
+    {
+        if (key == ConsoleKey.A)
+        {
+            damage = _random.Next(15) + 1;
+            return $"\n{Name} sword hit! Damage is {damage}";
+        }
+        else if (key == ConsoleKey.B)
+        {
+            damage = _random.Next(5) + 5;
+            return $"\n{Name} hand strike! Damage is {damage}";
+        }
+        else
+        {
+            damage = _random.Next(10) + 1;
+            return $"\n{Name} kick! Damage is {damage}";
+        }
+        
+    }
+
+    public string Wound(int damage)
+    {
+        _hitpoints -= damage;
+
+        if (_hitpoints < 0)
+            _hitpoints = 0;
+
+        return $"{Name} is wounded!! (hitpoints: {_hitpoints})";
+    }
+
+    public bool IsAlive()
+    {
+        return _hitpoints > 0;
+    }
+}
+
+public class Hero : Character
+{
+    public Hero() : base("Hero") { }
+}
+
+public class EvilOrc : Character, ICharacter
+{
+    public EvilOrc() : base("Evil orc") { }
+}
+
+public class FightWithEvilOrc
+{
+    private readonly ICharacter _hero;
+    private readonly ICharacter _evilOrc;
+
+    public FightWithEvilOrc(ICharacter hero, ICharacter evilOrc)
+    {
+        _hero = hero;
+        _evilOrc = evilOrc;
+    }
+
+    public bool FightRound(int count, ConsoleKey key)
+    {
+        Console.WriteLine($"\n\nFIGHT ({count} ROUND):");
+
+        Console.WriteLine(_hero.Hit(key, out int damage));
+        Console.WriteLine(_evilOrc.Wound(damage));
+
+        Console.WriteLine(_evilOrc.Hit(ConsoleKey.Clear, out damage));
+        Console.WriteLine(_hero.Wound(damage));
+
+        return _hero.IsAlive() && _evilOrc.IsAlive();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        var services = new ServiceCollection();
+
+        services.AddTransient<Hero>();
+        services.AddTransient<EvilOrc>();
+
+        services.AddTransient<FightWithEvilOrc>(sp =>
+        {
+            var hero = sp.GetRequiredService<Hero>();
+            var orc = sp.GetRequiredService<EvilOrc>();
+            return new FightWithEvilOrc(hero, orc);
+        });
+
+        var serviceProvider = services.BuildServiceProvider();
+        var fight = serviceProvider.GetService<FightWithEvilOrc>();
+
+        var round = 1;
+
+        Console.WriteLine("FIGHT AGAINST EVIL ORC!\n" +
+            "A - sword strike (powerful but inaccurate)\n" +
+            "B - punch (accurate but not powerful)");
+
+        while (true)
+        {
+            Console.Write("\nYour choice: ");
+
+            if (!fight.FightRound(round++, Console.ReadKey().Key))
+            {
+                Console.WriteLine("\nFIGHT IS OVER!");
+                break;
+            }
+        }
+    } 
 }
 ```
