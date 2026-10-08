@@ -2231,6 +2231,7 @@ class Program
 ```c#
 using System;
 using Microsoft.Extensions.DependencyInjection;
+// using Autofac;
 
 public interface ICharacter
 {
@@ -2331,6 +2332,8 @@ class Program
 {
     static void Main()
     {
+        // Microsoft.Extensions.DependencyInjection;
+
         var services = new ServiceCollection();
 
         services.AddTransient<Hero>();
@@ -2345,6 +2348,23 @@ class Program
 
         var serviceProvider = services.BuildServiceProvider();
         var fight = serviceProvider.GetService<FightWithEvilOrc>();
+
+        //  Autofac
+
+        //  var builder = new ContainerBuilder();
+
+        //  builder.RegisterType<Hero>().AsSelf().InstancePerDependency();
+        //  builder.RegisterType<EvilOrc>().AsSelf().InstancePerDependency();
+
+        //  builder.Register(c =>
+        //  {
+        //      var hero = c.Resolve<Hero>();
+        //      var orc = c.Resolve<EvilOrc>();
+        //      return new FightWithEvilOrc(hero, orc);
+        //  }).As<FightWithEvilOrc>().InstancePerDependency();
+
+        //  var container = builder.Build();
+        //  var fight = container.Resolve<FightWithEvilOrc>();
 
         var round = 1;
 
